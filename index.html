@@ -13,7 +13,7 @@
 <body>
     <!-- header area start -->
     <header>
-        <nav class="flex justify-between items-center w-11/12 mx-auto py-4 border-b">
+        <nav class="flex flex-col md:flex-row justify-between items-center w-11/12 mx-auto py-4 border-b gap-3 md:gap-0">
             <div class="lg:logo w-[100px]"><img src="asset/Logo.png" alt=""></div>
             <div class="search">
                 <label class="input input-bordered flex items-center gap-2">
@@ -37,10 +37,14 @@
     </header>
     <!-- header area end -->
     <!-- categories nav area start -->
-    <nav id="categories" class="flex flex-wrap md:flex justify-center items-center gap-5 py-5">
-
-    </nav>
+    <nav id="categories" class="flex flex-wrap md:flex justify-center items-center gap-5 py-5"></nav>
     <!-- categories nav area end -->
+
+    <!-- main area start -->
+    <main>
+        <section id="videos" class="w-11/12 mx-auto gird grid-cols-1 md:grid-cols-2 lg:grid-cols-4 py-10"></section>
+    </main>
+    <!-- main area end -->
     
 
     <script src="script/video.js"></script>

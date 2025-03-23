@@ -25,7 +25,7 @@ const DisplayCategories = (categories) => {
 
     const categoryContainer = document.getElementById('categories');
     categories.forEach(item => {
-        console.log(item);
+        // console.log(item);
         // create a button element
         const button = document.createElement('button');
         button.classList = 'btn px-10 py-2 border-none bg-black text-white';
@@ -36,5 +36,29 @@ const DisplayCategories = (categories) => {
     });
 };
 
-
+// load categories call
 loadCategories();
+
+
+// create loadVideos
+const loadVideos = () => {
+    // fetch the data
+    const data = fetch('https://openapi.programming-hero.com/api/phero-tube/videos')
+        .then(res => res.json())
+        .then(data => DisplayVideos(data?.videos))
+        .catch(err => console.log(err))
+};
+
+
+// create DisplayVideos
+const DisplayVideos = (videos) => {
+    // add data in html
+    // console.log(videos); // see, data recevied or not
+
+    const videosContainer = document.getElementById('videos');
+    videos?.forEach(video => {
+        console.log(video);
+    });
+};
+
+loadVideos();
