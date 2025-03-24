@@ -37,17 +37,20 @@ const DisplayCategories = (categories) => {
     categories.forEach(item => {
         // console.log(item);
         // create a button element
-        const button = document.createElement('button');
-        button.classList = 'btn px-10 py-2 border-none bg-black text-white';
-        button.innerText = item?.category;
+        const buttonContainer = document.createElement('div');
+        // button.classList = 'btn px-10 py-2 border-none bg-black text-white';
+        buttonContainer.innerHTML = `
+            <button onclick="loadCategoriesVideos(${item.category_id})" class="btn px-10 py-2 border-none bg-black text-white">${item.category}</button>
+        `;
 
         // add button to category content
-        categoryContainer.append(button);
+        categoryContainer.append(buttonContainer);
     });
 };
 
 // load categories call
 loadCategories();
+
 
 
 // create loadVideos
@@ -61,33 +64,36 @@ const loadVideos = () => {
 
 
 
-// only help for codes
-// const videoDemo = {
-//     "category_id": "1001",
-//     "video_id": "aaag",
-//     "thumbnail": "https://i.ibb.co/DRxB1Wm/sunris.jpg",
-//     "title": "Sunrise Reverie",
-//     "authors": [
-//         {
-//             "profile_picture": "https://i.ibb.co/yQFJ42h/ava.jpg",
-//             "profile_name": "Ava Johnson",
-//             "verified": false
-//         }
-//     ],
-//     "others": {
-//         "views": "1.1K",
-//         "posted_date": "16950"
-//     },
-//     "description": "'Sunrise Reverie' by Ava Johnson takes listeners on a serene journey through tranquil melodies and soft harmonies. With 1.1K views, this track is perfect for morning relaxation or an evening wind-down. Ava's heartfelt lyrics and soothing voice create a sense of peace, making it a go-to for fans seeking calm and inspiration in their musical choices."
-// };
+// 
+const loadCategoriesVideos = (id) => {
+    fetch(`https://openapi.programming-hero.com/api/phero-tube/category/${id}`)
+        .then(res => res.json())
+        .then(data => DisplayVideos(data?.category))
+        .catch(err => console.log(err))
+};
 
 
 // create DisplayVideos
 const DisplayVideos = (videos) => {
+    // console.log(videos);
     // add data in html
     // console.log(videos); // see, data recevied or not
 
     const videosContainer = document.getElementById('videos');
+    videosContainer.innerHTML = '';
+
+    if(videos.length === 0){
+        videosContainer.classList.remove('grid');
+        videosContainer.innerHTML = `
+            <div class="min-h-[300px] flex flex-col gap-5 justify-center w-full">
+                <img src="asset/Frame-3.png" />
+            </div>
+        `;
+        return;
+    }else{
+        videosContainer.classList.add('grid');
+    }
+
     videos?.forEach(video => {
         // console.log(video.authors[0]?.verified);
         // create a div element for video card
