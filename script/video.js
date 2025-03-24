@@ -11,6 +11,14 @@ function getTimeString(time){
 }
 
 
+const removeActiveClass = () => {
+    const buttons = document.getElementsByClassName('category-btn');
+    // console.log(buttons);
+    for(let btn of buttons){
+        btn.classList.remove('active');
+    }
+};
+
 // 1. Fetch, Load and Show Categories on html
 
 // create loadCategories
@@ -69,6 +77,10 @@ const loadCategoriesVideos = (id) => {
     fetch(`https://openapi.programming-hero.com/api/phero-tube/category/${id}`)
         .then(res => res.json())
         .then(data => {
+            // sobaike active claas remove koro
+            removeActiveClass();
+
+            // ei id er button e active class add koro
             const activeBtn = document.getElementById(`btn-${id}`);
             // console.log(activeBtn);
             activeBtn.classList.add("active");
@@ -76,6 +88,19 @@ const loadCategoriesVideos = (id) => {
         })
         .catch(err => console.log(err))
 };
+
+// load video details
+const loadDetails = async (videoId) => {
+    // console.log(videoId);
+    const uri = `https://openapi.programming-hero.com/api/phero-tube/video/${videoId}`;
+    const res = await fetch(uri);
+    const data = await res.json();
+    console.log(data);
+};
+
+
+// display details
+
 
 
 // create DisplayVideos
@@ -124,7 +149,9 @@ const DisplayVideos = (videos) => {
                     ${video?.authors[0]?.verified === true ? '<img class="w-5 h-5 rounded-full object-cover" src="https://img.icons8.com/?size=100&id=D9RtvkuOe31p&format=png&color=000000" />' : ''}
                     
                 </div>
-                <p></p>
+                <div>
+                    <p><button onclick="loadDetails('${video?.video_id}')" class="btn btn-sm bg-red-500 mt-2">details</button></p>
+                </div>
             </div>
         </div>
         `;
