@@ -7,3 +7,15 @@ const isVerified = true;
 // }
 
 console.log(`${isVerified === true ? 'user is verified' : 'user is not verified'}`);
+
+
+function getTimeString(time){
+    // get hour and reset seconds
+    const hour = parseInt(time / 3600);
+    const remainingSecond = time % 3600;
+    const remainingMinute = parseInt(remainingSecond / 60);
+    const second = remainingSecond % 60;
+    return `${hour} hour ${remainingMinute} minite ${second} second ago`;
+}
+
+console.log(getTimeString(786536));

@@ -1,5 +1,15 @@
 // console.log('file connect');
 
+// convert time string
+function getTimeString(time){
+    // get hour and reset seconds
+    const hour = parseInt(time / 3600);
+    const remainingSecond = time % 3600;
+    const remainingMinute = parseInt(remainingSecond / 60);
+    const second = remainingSecond % 60;
+    return `${hour} hour ${remainingMinute} minite ${second} second ago`;
+}
+
 
 // 1. Fetch, Load and Show Categories on html
 
@@ -84,11 +94,13 @@ const DisplayVideos = (videos) => {
         const card = document.createElement('div');
         card.classList = 'card card-compact';
         card.innerHTML = `
-        <figure class="h-[200px]">
+        <figure class="h-[200px] relative">
             <img
             class="h-full w-full object-cover"
             src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
             alt="Shoes" />
+            ${video?.others?.posted_date ? `<span class="absolute bottom-2 right-2 px-5 py-1 text-sm rounded-md bg-black text-white bg-opacity-75">${getTimeString(video?.others?.posted_date)}</span>` : ''} 
+            
         </figure>
         <div class="px-0 py-5 flex gap-2">
             <div>
