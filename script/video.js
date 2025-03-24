@@ -95,12 +95,22 @@ const loadDetails = async (videoId) => {
     const uri = `https://openapi.programming-hero.com/api/phero-tube/video/${videoId}`;
     const res = await fetch(uri);
     const data = await res.json();
-    console.log(data);
+    // console.log(data?.video);
+    displayDetails(data?.video);
 };
 
 
 // display details
+const displayDetails = (video) => {
+    // console.log(video);
+    const deatilsContainer = document.getElementById('modal-content');
 
+    // way-1
+    // document.getElementById('showModalData').click();
+
+    // way-2
+    document.getElementById('customModal').showModal();
+};
 
 
 // create DisplayVideos
