@@ -102,8 +102,19 @@ const loadDetails = async (videoId) => {
 
 // display details
 const displayDetails = (video) => {
-    // console.log(video);
+    console.log(video);
     const deatilsContainer = document.getElementById('modal-content');
+
+    deatilsContainer.innerHTML = `
+        <img
+        class="h-full w-full object-cover"
+        src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+        alt="Shoes" />
+        <div class="mt-4 flex flex-col gap-2">
+            <h2 class="font-bold">${video?.title}</h2>
+            <p>${video?.description}</p>
+        </div>
+    `;
 
     // way-1
     // document.getElementById('showModalData').click();
